@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="793.70081"
+   height="1122.5197"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="avl_insert_out_of_balance.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showborder="false"
+     units="px"
+     inkscape:snap-global="false"
+     inkscape:zoom="1"
+     inkscape:cx="572"
+     inkscape:cy="578"
+     inkscape:window-width="1920"
+     inkscape:window-height="986"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.78157;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path846"
+       cx="99.899979"
+       cy="120.3251"
+       r="7.4496331"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <g
+       id="g2970"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.79375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 93.611591,124.39714 73.385437,137.35506"
+         id="path1020"
+         sodipodi:nodetypes="cc" />
+      <path
+         id="path2256"
+         style="fill:none;stroke:#000000;stroke-width:0.79375;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         inkscape:transform-center-y="-5.4126792"
+         d="M 85.545944,169.82035 H 61.25587 l 12.145037,-32.47607 z" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.79375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 106.08698,124.39714 20.22615,12.95792"
+       id="path2955"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       id="path2957"
+       style="fill:none;stroke:#000000;stroke-width:0.860207;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       inkscape:transform-center-y="-6.3744132"
+       d="m 114.18584,175.62398 h 24.22364 L 126.29766,137.3775 Z"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.79375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 126.29766,176.05408 c 0,7.88253 0,7.88253 0,7.88253"
+       id="path3009"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <g
+       id="g938"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150">
+      <circle
+         style="fill:none;stroke:#000000;stroke-width:0.623321;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         id="circle3109"
+         cx="126.29766"
+         cy="190.18953"
+         r="5.941258"
+         inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150" />
+      <text
+         xml:space="preserve"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.75237px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.211011"
+         x="124.93928"
+         y="191.64188"
+         id="text4369"
+         inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+         inkscape:export-xdpi="150"
+         inkscape:export-ydpi="150"><tspan
+           sodipodi:role="line"
+           id="tspan4367"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.75237px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.211011"
+           x="124.93928"
+           y="191.64188">x</tspan></text>
+    </g>
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.78157;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       id="circle831"
+       cx="-204.83818"
+       cy="120.3251"
+       r="7.4496331"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"
+       transform="scale(-1,1)" />
+    <g
+       id="g837"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"
+       transform="matrix(-1,0,0,1,304.73816,0)">
+      <path
+         style="fill:none;stroke:#000000;stroke-width:0.79375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         d="M 93.611591,124.39714 73.385437,137.35506"
+         id="path833"
+         sodipodi:nodetypes="cc" />
+      <path
+         id="path835"
+         style="fill:none;stroke:#000000;stroke-width:0.79375;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+         inkscape:transform-center-y="-5.4126792"
+         d="M 85.545944,169.82035 H 61.25587 l 12.145037,-32.47607 z" />
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.79375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 198.65118,124.39714 -20.22615,12.95792"
+       id="path839"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       id="path841"
+       style="fill:none;stroke:#000000;stroke-width:0.860207;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       inkscape:transform-center-y="-6.3744132"
+       d="M 190.55232,175.62398 H 166.32868 L 178.4405,137.3775 Z"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.79375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 178.4405,176.05408 c 0,7.88253 0,7.88253 0,7.88253"
+       id="path843"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <circle
+       style="fill:none;stroke:#000000;stroke-width:0.623321;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none"
+       id="circle845"
+       cx="-178.44051"
+       cy="190.18953"
+       r="5.941258"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"
+       transform="scale(-1,1)" />
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.75237px;line-height:1.25;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.211011"
+       x="177.08212"
+       y="191.64188"
+       id="text933"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\PNG\avl_insert_out_of_balance.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan931"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:6.75237px;font-family:'Times New Roman';-inkscape-font-specification:'Times New Roman, Italic';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.211011"
+         x="177.08212"
+         y="191.64188">x</tspan></text>
+  </g>
+</svg>

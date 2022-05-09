@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg13868"
+   sodipodi:docname="hash_table.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview13870"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     showborder="false"
+     inkscape:zoom="0.70339615"
+     inkscape:cx="787.60738"
+     inkscape:cy="585.72968"
+     inkscape:window-width="1920"
+     inkscape:window-height="986"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     inkscape:snap-nodes="false" />
+  <defs
+     id="defs13865" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.52916667;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 34.309387,78.072257 c -11.781942,2.056284 -22.690131,3.266365 -32.3676563,12.93151 -7.934435,7.61615 -9.1235529,15.063103 -6.4992754,23.694443 5.0897534,12.68745 -0.1182368,29.53982 1.5641847,40.43111 3.40780978,16.94653 9.5283196,31.48177 23.198104,38.70494 23.135895,6.98894 26.037684,3.82162 38.283745,5.93812 12.192334,0.54225 18.976179,-2.28848 32.925214,-17.50839 4.859222,-6.12072 -0.285164,-14.65584 4.294737,-25.40849 3.746987,-10.81554 2.752715,-21.14187 0.22141,-31.52302 C 92.687847,109.6769 91.359056,101.01805 84.411792,90.384093 79.206675,82.344636 73.518322,75.954729 34.309387,78.072257 Z"
+       id="path13964"
+       sodipodi:nodetypes="ccccccccccc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\hash_table.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.52916667;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 232.60694,108.29568 c -10.64858,0.83901 -15.25835,6.08555 -21.57928,12.39894 -7.02624,7.31286 -14.41167,25.97791 -8.11328,33.21295 17.74426,18.08618 22.25609,12.04573 32.56526,11.20364 25.63793,-4.85221 31.25235,-9.75152 31.28045,-22.98156 -0.2206,-15.45032 12.03824,-35.56467 -34.15315,-33.83397 z"
+       id="path17001"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\hash_table.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="14.093903"
+       y="210.25801"
+       id="text21511"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\hash_table.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan21509"
+         style="stroke-width:0.264583"
+         x="14.093903"
+         y="210.25801">All keys</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="209.1075"
+       y="210.25803"
+       id="text24419"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\hash_table.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan24417"
+         style="stroke-width:0.264583"
+         x="209.1075"
+         y="210.25803">Hashed keys</tspan></text>
+    <rect
+       style="fill:none;stroke:#000000;stroke-width:0.529167;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect877"
+       width="76.338875"
+       height="41.397697"
+       x="339.11264"
+       y="118.87595"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\hash_table.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.79375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 106.34271,103.30435 c 36.72159,-6.476415 61.37432,-2.09086 83.93478,4.17775"
+       id="path992"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\hash_table.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.79375;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 106.70098,167.15336 c 36.72159,6.47641 61.37432,2.09086 83.93478,-4.17775"
+       id="path1244"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\hash_table.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       sodipodi:type="star"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path1268"
+       inkscape:flatsided="true"
+       sodipodi:sides="3"
+       sodipodi:cx="536.2276"
+       sodipodi:cy="410.97244"
+       sodipodi:r1="16.722027"
+       sodipodi:r2="8.3610134"
+       sodipodi:arg1="0.5543075"
+       sodipodi:arg2="1.601505"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 550.44576,419.77416 -28.94975,-0.88929 15.24502,-24.62657 z"
+       transform="matrix(0.22324088,-0.06708813,0.06708813,0.22324088,44.927597,52.183751)"
+       inkscape:transform-center-x="-0.50334382"
+       inkscape:transform-center-y="-0.50551111"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\hash_table.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       sodipodi:type="star"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path1474"
+       inkscape:flatsided="true"
+       sodipodi:sides="3"
+       sodipodi:cx="536.2276"
+       sodipodi:cy="410.97244"
+       sodipodi:r1="16.722027"
+       sodipodi:r2="8.3610134"
+       sodipodi:arg1="0.5543075"
+       sodipodi:arg2="1.601505"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 550.44576,419.77416 -28.94975,-0.88929 15.24502,-24.62657 z"
+       transform="matrix(0.22324088,0.06708813,0.06708813,-0.22324088,44.927597,218.35642)"
+       inkscape:transform-center-x="-0.50334382"
+       inkscape:transform-center-y="0.50550658"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\hash_table.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32291667;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 275.85447,137.92724 c 41.64862,0 42.18951,0 42.18951,0"
+       id="path1511"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\hash_table.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       sodipodi:type="star"
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:3;stroke-miterlimit:4;stroke-dasharray:none"
+       id="path1535"
+       inkscape:flatsided="true"
+       sodipodi:sides="3"
+       sodipodi:cx="1075.3394"
+       sodipodi:cy="474.13235"
+       sodipodi:r1="11.568745"
+       sodipodi:r2="5.7843723"
+       sodipodi:arg1="0.52359878"
+       sodipodi:arg2="1.5707963"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 1085.3582,479.91673 -20.0377,0 10.0189,-17.35312 z"
+       transform="matrix(0,0.26458333,-0.26458333,0,444.61709,-146.77835)"
+       inkscape:transform-center-x="-0.76522584"
+       inkscape:transform-center-y="-1.3329965e-06"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\hash_table.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="344.09558"
+       y="210.25803"
+       id="text1619"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\hash_table.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan1617"
+         style="stroke-width:0.264583"
+         x="344.09558"
+         y="210.25803">Access Table</tspan></text>
+  </g>
+</svg>

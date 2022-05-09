@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="heap_array.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.4040697"
+     inkscape:cx="363.22984"
+     inkscape:cy="267.08076"
+     inkscape:window-width="1920"
+     inkscape:window-height="986"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     showborder="false" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;stroke:#000000;stroke-width:1.194;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect846"
+       width="169.54419"
+       height="19.88278"
+       x="4.8931551"
+       y="70.955025"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 24.847012,70.791316 V 90.852151"
+       id="path983"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 44.955358,70.791316 V 90.852151"
+       id="path1278"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 66.122038,70.791316 V 90.852151"
+       id="path1280"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 87.817935,70.791316 V 90.852151"
+       id="path1282"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 109.51391,70.791316 V 90.852151"
+       id="path1284"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 131.73905,70.791316 V 90.852151"
+       id="path1286"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 153.43502,70.791316 V 90.852151"
+       id="path1288"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 153.43502,70.791316 V 90.852151"
+       id="path1290"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="11.496404"
+       y="69.210159"
+       id="text2537"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan2535"
+         style="stroke-width:0.264583"
+         x="11.496404"
+         y="69.210159">0</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="31.075588"
+       y="69.210159"
+       id="text6095"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan6093"
+         style="stroke-width:0.264583"
+         x="31.075588"
+         y="69.210159">1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="52.242275"
+       y="69.210159"
+       id="text6099"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan6097"
+         style="stroke-width:0.264583"
+         x="52.242275"
+         y="69.210159">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="73.408966"
+       y="69.210159"
+       id="text6103"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan6101"
+         style="stroke-width:0.264583"
+         x="73.408966"
+         y="69.210159">3</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="95.104782"
+       y="69.210159"
+       id="text6107"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan6105"
+         style="stroke-width:0.264583"
+         x="95.104782"
+         y="69.210159">4</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="116.96421"
+       y="69.210159"
+       id="text6111"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan6109"
+         style="stroke-width:0.264583"
+         x="116.96421"
+         y="69.210159">5</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="139.02518"
+       y="69.210159"
+       id="text6115"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan6113"
+         style="stroke-width:0.264583"
+         x="139.02518"
+         y="69.210159">6</tspan></text>
+    <g
+       aria-label="7"
+       id="text6119"
+       style="font-size:10.5833px;line-height:1.25;stroke-width:0.264583"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"
+       transform="translate(-20.728435)">
+      <path
+         d="m 187.51078,62.667944 -3.48298,6.542215 h -1.10587 l 3.70519,-6.790261 h -4.38215 v -0.904335 h 5.26581 z"
+         id="path9889" />
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="27.97501"
+       y="84.956383"
+       id="text11302"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan11300"
+         style="stroke-width:0.264583"
+         x="27.97501"
+         y="84.956383">18</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="48.083363"
+       y="84.956383"
+       id="text12514"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan12512"
+         style="stroke-width:0.264583"
+         x="48.083363"
+         y="84.956383">16</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="73.074944"
+       y="84.956383"
+       id="text12518"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan12516"
+         style="stroke-width:0.264583"
+         x="73.074944"
+         y="84.956383">9</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="95.179237"
+       y="84.956383"
+       id="text12522"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan12520"
+         style="stroke-width:0.264583"
+         x="95.179237"
+         y="84.956383">2</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="117.34661"
+       y="84.956383"
+       id="text12526"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan12524"
+         style="stroke-width:0.264583"
+         x="117.34661"
+         y="84.956383">9</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 4.8931553,90.837807 24.847012,70.791316"
+       id="path16232"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 4.8931523,85.01697 19.026177,70.791313"
+       id="path16314"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 4.8931503,78.666968 12.676175,70.791311"
+       id="path16316"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 11.004031,90.605774 24.847013,76.612151"
+       id="path16318"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.32292;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 17.063991,90.837809 7.783024,-7.875656"
+       id="path16320"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.9333px;line-height:1.25;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="178.45299"
+       y="81.760445"
+       id="text5321"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan5319"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.9333px;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="178.45299"
+         y="81.760445">.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.9333px;line-height:1.25;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="184.27374"
+       y="81.760445"
+       id="text7025"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan7023"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.9333px;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="184.27374"
+         y="81.760445">.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.9333px;line-height:1.25;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="190.0945"
+       y="81.760445"
+       id="text7033"
+       inkscape:export-filename="C:\Users\Rishibh P\Desktop\OneDrive - University of Toronto\Courses\CSC263\Images\heap_array.png"
+       inkscape:export-xdpi="150"
+       inkscape:export-ydpi="150"><tspan
+         sodipodi:role="line"
+         id="tspan7031"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.9333px;font-family:'Baskerville Old Face';-inkscape-font-specification:'Baskerville Old Face, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;stroke-width:0.264583"
+         x="190.0945"
+         y="81.760445">.</tspan></text>
+  </g>
+</svg>
