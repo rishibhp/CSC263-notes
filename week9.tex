@@ -1,0 +1,40 @@
+\subsection{Depth First Search}
+As we said depth first search will be the counterpart to breadth first search. In this case, we will search as deep as possible before backtracking to explore the edges of an already discovered vertex. We will also be colouring the vertices as we walk through the graph and the colours and what they correspond to will be the same: white for undiscovered vertices, grey for discovered vertices that have not been fully explored and black for vertices that have been fully explored. In this case, however, our definition of fully explored is subtly different. We will say a vertex has been fully explored if we have explored all of its its children and their children and their children and so on. Additionally instead of storing a distance in the nodes we will store two timestamps (i.e. two integers) for the discovery time, when a vertex is first discovered, and the finish time, when a vertex has been fully explored.
+
+DFS is an algorithm that is begging to be written recursively. Hence we will heed its wishes and do just that. Additionally, DFS is commonly used to find the connected components so our main algorithm won't take in a source vertex will instead call a helper function \ttt{DFS-VISIT(G, u)} repeatedly for each $u$ in $V$. 
+
+\begin{lstlisting}
+DFS(G = (V, E)):
+    # initialisation
+    for each v in V:
+        colour[v] = white
+        f[v] = d[v] = inf
+        p[v] = null
+    time = 0 # global
+    
+    for each v in V:
+        if colour[v] == white:
+            DFS-VISIT(G, v)
+
+DFS-VISIT(G = (V, E), u):
+    colour[u] = grey
+    time = time + 1
+    d[u] = time
+    
+    for each (u, v) in E:
+        if colour[v] == white:
+            p[v] = u
+            DFS-VISIT(G, v)
+    colour[u] = black
+    time = time + 1
+    f[u] = time
+\end{lstlisting}
+\begin{remark}
+The above algorithm is for a directed graph. For undirected graphs, we just need to make a slight tweak to ensure that we don't travel over the same edge twice.
+\end{remark}
+
+After we have run DFS we will be left with a whole bunch of disconnected trees, which is called the DFS-forest. Specifically, we will have trees from the parent-child relationships we are tracking, each of which corresponds to an edge in the original graph. These edges are called, understandably enough, tree edges. However consider the remaining edges in the graph. We may, for example, have a \textit{back edge} $(u, v) $ where $v$ is an ancestor of the vertex $u$ (hence we are going `back up' the tree with this edge). These are found during the execution of line 19 above, when the colour of an edge's endpoint (in this case $v$) is grey. We may of course have cases where rather than being an ancestor $v$ is a descendant of $u$. In this case we get a \textit{forward edge}. Finally, we may have that $v$ is neither an ancestor nor a descendant. Thus the edge $(u, v)$ is an edge between different branches of the same tree or an edge between different trees in the forest. Such edges are called cross-edges. Both forward edges and cross-edges are found when $v$ is black.
+
+% TODO: Add back edges and forward edges and cross edges
+
+Let us consider the complexity of DFS. Note that \ttt{DFS-VISIT} is only called on white vertices which are immediately painted grey. So \ttt{DFS-VISIT} is called exactly once on each vertex (note this is different from BFS since in a disconnected graph, we may not reach every node with BFS. With DFS, however, this is not the case). Each \ttt{DFS-VISIT} also walks through the adjacency list of a single vertex. Hence over all the vertices we will have traversed through all the edges. As we have argued before, the complexity of this algorithm must then be the larger of $\left| V \right|$ and $\left| E \right|$, so in particular we can conclude that the runtime for DFS is $O(\left| V \right| + \left| E \right|)$.

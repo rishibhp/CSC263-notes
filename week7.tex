@@ -1,0 +1,94 @@
+\section{Amortised Analysis}
+Thus far we have discussed finding the worst case runtime of single operations. However, in the `real world' (whatever that may be), operations don't always run alone. Quite common is to run a sequence of operations. Then what we care about is the time complexity of the sequence. This leads us to the notion of the \textit{worst-case sequence complexity} (WCSC) which is the maximum time taken over all sequences of $m$ operations. We can immediately find an upper bound for this, since the WCSC has to be less than or equal to $m$ times the worst-case runtime of the worst operation. This would be assuming we hit the worst case at every single stage in our sequence. However the WCSC may be strictly less than this (for example if repeatedly applying the worst operation is not a legal sequence of operations, or becomes cheaper each time).
+
+The amortised sequence complexity is then defined to be
+$$ \text{Amortised sequence complexity} = \frac{\text{WCSC over all sequences of $m$ operations}}{m} $$
+This represents (in some sense) the average worst-case complexity per operation. Note, however, that this is different than the average-case analysis we did previously (in particular there are no probability distributions). This average instead gives us an idea of how much time we expect any given operation to take when the ADT is being used, where we account for how the different operations may influence each other's runtime.
+
+\subsection{Calculating Amortised Complexity}
+There are a few different ways one can calculate the amortised complexity. We mention 3 here.
+
+The simplest way, of course, is to just follow the definition: define all sequences of operations of length $m$, find their running time, find the worst one and divide that by $m$. This is known as the \textit{aggregate} method. This is particularly useful in ADTs with only one operation since there is always exactly one sequence of length $m$ (apply the operation $m$ times). Another use for the aggregate method is to find an upper bound for the worst-case time complexity of all sequences of $m$ operations.
+
+Another method we consider is something we have lightly touched on in the past. Recall in our discussion of heapsort (see \autoref{sec:heapsort}), specifically in the context of turning an unsorted array into a heap. We discussed how by applying a lot of cheap operations first (calling \ttt{MaxHeapify} on smaller subtrees), we can `buy' some time to make expensive operations (calling \ttt{MaxHeapify on larger subtrees} a bit cheaper. We generalise this idea over here. In particular, we associate a fixed `fee' for each operation (this fee is the amortised sequence complexity itself). Applying operation takes a certain cost as well. If the cost of applying the operation is less than the fee, then we have some profit remaining. We bank this overcharge until an expensive operation comes along whose cost is actually greater than the fee. We can compensate for the extra cost using the time/money (you know what they say, time is money) we have banked. This is known as the \textit{potential method} (think of potential energy from physics). One thing to note about this method is that we assume the expensive operations to be at the end of the sequence (so in particular, we never go into debt).
+
+A clever variation of the potential method is the \textit{accounting} method, where instead of just having the overcharge/profit associated with the data structure as a whole, we associate it to specific parts of the data structure (for example to a particular node in a tree or to a particular element in an array). We will mostly focus on the aggregate method and accounting method.
+
+\subsection{Example 1 (Binary Counter)}\label{sec:binary-agg}
+Suppose our data structure is a $k$-bit binary counter, whose only operation is increment. We will find the amortised sequence complexity using the aggregate method. Our cost will be the number of bits that need to be changed upon each increment.
+
+Suppose we call increment $m$ times. Then bit 0 is flipped every time. Bit 1 is flipped every other time. To be precise, it is flipped $
+\lfloor \frac{m}{2} \rfloor$ times. Similarly bit 2 is flipped every 4 times or $\lfloor \frac{m}{4} \rfloor$ times. Continuing this process, we find that the number of bit flips performed is 
+$$ \sum_{i = 0}^{k - 1} \bigg\lfloor \frac{m}{2^i} \bigg\rfloor $$
+We can bound this above by
+$$ \sum_{i = 0}^{\infty} \frac{m}{2^i} = 2m $$
+This means that the runtime for the sequence of $m$ increments, which is also the worst cast time complexity of all sequences of $m$ operations, is $O(m)$. Then the amortised cost of the operation is $\frac{O(m)}{m} = O(1)$.
+
+We can also analyse this using the accounting method. It will be useful to have the code for this.
+\begin{lstlisting}
+INCREMENT(A):
+    i = 0
+    while i < length[A] and A[i] == 1:
+        do A[i] = 0
+        i = i + 1
+    if i < length[A]:
+        then A[i] = 1
+\end{lstlisting}
+
+We will charge \$2 for each increment. In this case we will have a so-called \textit{credit invariant} which will be that we can place \$1 on every bit that is 1. A credit invariant is a condition that holds throughout the execution of a sequence of operations. We can use induction to show it holds true. The invariant is trivially true at the beginning since the counter is all 0's. In each increment we alter the string of leading 1's and flip (at most( one 0 to a 1. The flipping of the 1's to 0's can be paid for by the \$1 we have place on them. After flipping the 0 to 1, we have \$1 left which can be placed on the new 1. Hence the amortised runtime is at most 2, giving us $O(1)$ amortised complexity again.
+
+\subsection{Example 2 (Stacks)}
+We will define a new ADT called a multipop Stack which has the usual push and pop operations (each of which takes constant time). In addition, we also have multipop which works as follows
+\begin{lstlisting}
+MULTIPOP(S, k):
+    while not STACK-EMPTY(S) and k != 0:
+        do POP(S)
+        k <- k - 1
+\end{lstlisting}
+Let us try and find the amortised sequence complexity of this data structure. First, we see that the time complexity of \ttt{MULTIPOP(S, k)} is min(\ttt{|S|}, \ttt{k}), making it by far the worst operation. In particular, if we were to call to \ttt{MULTIPOP(S, n)} $n$ times, then the time for this sequence would be bounded by $O(n^2)$. However clearly this is far too large of a bound, we could never actually achieve it. First we would need at least $n - 1$ pushes to get our stack to contain some items (we are trying to maximise the runtime to find the worst case). We follow this with \ttt{MULTIPOP(S, n - 1)} (or something larger than $n - 1$) to see that the runtime is at most $O(2n - 2)$ or $O(n)$. Hence the amortised complexity of $O(1)$. We can also show this using the accounting method.
+
+The fee or charge (or amortised cost) will be $2$ for pushes and 0 for both pop and multipop (remember we are allowed to charge different amounts to different operations). Our credit invariant will be that every item in the stack has an (extra) \$1 on it. Suppose for now that the invariant holds (we will prove it later). This means that any time we need to pop an item, it always has the necessary cost to pay for it! Hence the amortised cost per operation is at most \$2 implying the amortised complexity is $O(1)$ (as we noted earlier).
+
+Now let us prove that the credit invariant holds. We do so using induction. We first show that it holds for the empty stack and then we show that if it holds before we run a given operation, it will hold after we run the operation as well. If we want to align this with usual induction, we can think of inducting on the lengths of the sequences of operations. We first show it holds for the sequence of length 0. Then assuming it holds for a sequence of length $k$, we show that it holds for sequences of length $k + 1$. By assumption the invariant holds before the $k + 1$st operation is run, hence we only need show that it holds after this operation is as well. Since this operation (in principle) could be anything, we show that if the invariant holds before running an operation, it will hold after it as well. Then let us do this.
+
+Clearly the invariant is trivially true (technically vacuously true), if the stack is empty. If we push an item, we have \$1 left over, which we can associate to the newly inserted item. Every time we pop, we remove an item (using the \$1 on it, which we know is there since we assume the credit invariant to hold before an operation is run). The same holds true for multipop (after all, it's just multiple,consecutive pops). In each case, the credit invariant remains true after the operation (assuming it held at the beginning), thus we are done.
+
+\subsection{Example 3 (Dynamic Arrays)}
+We now consider the situation with dynamic arrays, in particular inserting into them. We provide the code below.
+\begin{lstlisting}
+def insert(A, x):
+    # Check whether array is full
+    if A.size == A.allocated:
+        new_array = new array of length (A.allocated * 2)
+        copy all elements of A.array into new_array
+        A.array = new_array
+        A.allocated = A.allocated * 2
+        
+    # Insert element into first empty spot
+    A.array[A.size] = x
+    A.size = A.size + 1
+\end{lstlisting}
+The operations we count for our runtime analysis are the number of reads and writes into arrays performed. For example the first insert costs 1. The second insert requires us to copy the first element into a new array, costing 2 (one for the read and one for the write) and 1 more for the final insertion (i.e. the one from line 10). We first perform an aggregate analysis of insert.
+
+The time taken by $n$ inserts is given by
+$$ T(n) = \sum_{k = 0}^{n - 1} t_k $$
+where $t_k$ is the time taken to insert the item at index $k$ in our array. We see that
+\begin{align*}
+    t_k = 
+    \begin{cases}
+        2k + 1, &\text{ if $k$ is a power of 2}\\
+        1, &\text{otherwise}
+    \end{cases}
+\end{align*}
+
+Consider the summation for $T(n)$. We have a $+1$ for every term. This means the total will be $n$ plus something. This something is twice the sum of the powers of 2 that are below $n - 1$ (by definition of $t_k$). This means that
+\begin{align*}
+    T(n) &= \sum_{i = 0}^{\lfloor \log n - 1 \rfloor} 2 \cdot 2^{i} + n\\
+    &= 2 (2^{\lfloor \log n - 1 \rfloor + 1} - 1) + n\\
+    &\leq 2 (2^{\log (n - 1) + 1} - 1) + n\\
+    &= 2 \cdot 2(n - 1) - 2 + n\\
+    &= 5n - 6
+\end{align*}
+Hence a single insert has an amortised cost of $O(1)$.
+
+We can also find this using the accounting method. In this case we charge each insert \$5. Our credit invariant is that when the array is full and needs to be expanded, every item in the second half of the array has \$4 on it (which can be used for moving itself and another element from the first half). Any inserts into the second half of an array will only cost 1 and since we charge \$5, there will always remain \$4 which we can associate to this item.

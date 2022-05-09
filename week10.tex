@@ -1,0 +1,76 @@
+We have one final property with DFS known as the parenthesis theorem. 
+\begin{theorem}[Parenthesis theorem]
+Suppose we run DFS on a graph $G$. Then for any vertices $u, v \in G$, exactly one of the following holds:
+\begin{itemize}
+    \item $\left[d[u], f[u]\right] \cap \left[d[v], f[v]\right] = \emptyset$: the two intervals are disjoint
+    \item $\left[d[u], f[u]\right] \subset \left[d[v], f[v]\right]$: the interval $\left[d[u], f[u]\right]$ is contained in $\left[d[v], f[v]\right]$
+    \item $\left[d[v], f[v]\right] \subset \left[d[u], f[u]\right]$: the interval $\left[d[v], f[v]\right]$ is contained in $\left[d[u], f[u]\right]$
+\end{itemize}
+\end{theorem}
+
+\subsection{Using DFS}
+Topological sort is a way of ordering vertices, specifically in directed, acyclic graph. In particular, it is a linear ordering of vertices so that if $(u, v)$ is an edge in $G$, then $u$ comes before $v$ in the ordering (this shows why we need the graphs to be directed and acyclic). Using DFS, an algorithm to find a topological sorting of the vertices is quite easy to find. In particular, we perform DFS and as each vertex finishes we add it to the beginning of the list. This works because a vertex is added only after all its edges have been explored fully. Thus by adding it to the beginning we know that all of its neighbours will only appear later in the list.
+
+DFS can also be used to determine whether or not a directed graph $G$ is strongly connected, where by strongly connected we mean that for every pair of vertices $u, v$ there is a path from $u$ to $v$ and from $v$ to $u$ (this is very similar to the idea of connectedness for undirected graphs, although, as you might imagine, a bit more work needs to be done for strong connectedness since we need paths to exist in both directions). In order to find an algorithm for this, we employ the classic trick when handed a difficult problem: reduce it to a simpler one. Note that being strongly connected is equivalent to saying that there exists a node $s$ such that there is a node from $s$ to every vertex and a path from every vertex to $s$ (we can then construct a path from $u$ to $v$ by combining the paths from $u$ to $s$ and from $s$ to $v$). Of course if a graph is strongly connected then every $s$ is going to satisfy this property, so we can choose a vertex $s$ at random and simply check whether or not it satisfies this property.  
+
+The question then remains how can we check this. Well, at least one of the directions is easy to do with DFS. Namely, we perform \ttt{DFS-VISIT(s)}. If $f[s] = 2|V|$, then we know there is a path from $s$ to every other vertex. This is because the timer increments once each time we encounter a new vertex and once each time the vertex has been fully explored. Thus if $f[s] = 2|V|$, then all the vertices in $G$ were encountered (thus if $f[s] < 2 \left|V\right|$, we know that $G$ is not strongly connected). Thus if $f[s] = 2\left|V\right|$, we know that every vertex is reachable from $s$. But how can we determine whether the reversal of this question is true, whether $s$ is reachable from every vertex? In fact, phrasing this as the reversal is exactly the way to think of this: we simply reverse all of the edges in $G$ and run the same algorithm on this new graph. In this way, if a vertex is reachable from $s$ in the new graph, $s$ is reachable from the vertex in the original one. As a side note, the reversal of all the edges is particularly simple with adjacency matrices: we simply take their transpose!
+
+\subsection{Minimum Spanning Trees}
+Given a graph $G$, a spanning tree is a tree (i.e. an undirected, acyclic, connected graph), formed from a subset of the graphs edges that contains all the vertices in $G$. Quite often there is more than one spanning tree. In the case of unweighted graphs, all spanning trees are (generally) equally optimal. If the edges have weights though, this is no longer the case. In particular, there will be a \textit{minimum spanning tree}.
+
+Given a weighted graph $G$, we can talk about its own weight (sometimes denoted $w(G)$) which is simply the sum of the weights of the edges in the graph. Then a minimum spanning tree for $G$ is a spanning tree whose weight is smaller than or equal to the weight of any other spanning tree. The minimum spanning tree (MST) need not be unique either (the trivial example is any unweighted graph, which can be viewed as a weighted graph where all the edges have the same weight. In this call, all spanning trees will have the same weight).
+
+A very common problem is to find a minimum spanning tree of a weighted graph. The general approach for our algorithms to achieve this will be to start with just the vertices and continually add edges from the the graph to make a tree or forest as we go until we have our MST. Thus in general, the algorithm can be described like so
+\begin{lstlisting}[language=]
+GREEDY-MST(G = (V, E), w):
+    T = {} # invariant: T is a subset of some subset of G
+    while T is not a spanning tree: # i.e. while |T| < |V| - 1:
+        find e "safe for T"
+        T = T + e # or T = T union {e}
+\end{lstlisting}
+where \ttt{w} is the weight map, i.e. a map from the set of edges $E$ to the real numbers. Also note how in this case, we are thinking of the tree as simply a set of edges.
+
+The question, of course, is what does it mean for an edge to be safe. To be honest, the precise definition is that $e$ is safe for $T$ if $T$ being a subset of a minimum spanning tree implies that $T \cup \{e\}$ is also a subset of a minimum spanning tree. This is a bit of circular definition, so we need another way of determining when an edge is safe. For this we have the following theorem.
+\begin{theorem}
+Suppose $G$ is a connected, undirected, weighted graph, $T$ is a subset of some MST of $G$ and $e$ is an edge whose endpoints lie in different connected components of $T$. If $e$ is an edge of minimal weight connecting the connected components, then $e$ is safe for $T$.
+\end{theorem}
+Intuitively, this theorem is clear. Given two connected components in $T$, we know that the MST must contain an edge connecting them and if we pick an edge which doesn't have the minimal weight, then it would not be a \textit{minimum} spanning tree. We use this theorem for both the algorithms below, albeit in different ways.
+
+\subsubsection{Prim's Algorithm}
+Prim's algorithm works by choosing an initial root vertex and continually adding edges of minimal weight to $T$ to form a growing tree. That is, at each step we find an edge that has one vertex in $T$ and one outside $T$ and moreover over all such edges, we pick the edge that has minimal weight. The algorithm written precisely is like so:
+\begin{lstlisting}
+MST-PRIM(G = (V, E), w, r):
+    # r = initial choice of root
+    # initialisation
+    for each v in V:
+        priority[v] = inf # we will use a priority queue to determine the edge to add
+        p[v] = None # p[u] = parent of node u
+    priority[r] = 0
+    Q = V # Q = our priority queue
+    
+    # main bit
+    while Q is not empty:
+        u = ExtractMin(Q)
+        T = T + {(p[u], u)} # unless when u = r (in which case p[u] doesn't make sense)
+        for each v in adj[u]:
+            if v in Q and w(u, v) < priority[v]:
+            # w(u, v) < priority[v] means that we have found a `shorter'/more optimal path to v
+            decreasePriority(Q, v, w(u, v))
+            p[v] = u
+\end{lstlisting}
+Importantly, note the use of the method \ttt{decreasePriority} in line 17. This is of course not a part of the Priority Queue ADT (see \autoref{sec:heaps}), so we must augment our data structure. It is not immediate how we should change the heap data structure to allow for changing priorities. The main problem is of course finding the particular element, after finding the element, we just need to do some bubble ups. Luckily we don't need to do any searching! We can simply assume that the \ttt{v} in line 17 has a pointer to the corresponding element in the heap, which means that \ttt{decreasePriority} is $O(\log \left| V \right|)$ in the worst case (since the number of elements in the heap is $\left| V \right|$). Additionally, the combination of the \ttt{while} loop in line 11 and the \ttt{for} loop in line 14 means that the \ttt{if} block is run at most $\left| E \right|$ times (the combination of the loops means we iterate over $|E|$ twice since edge will be found once from either end point. But each edge can only be added at most once and after an edge has been added the \ttt{v in Q} part of the \ttt{if} statement will evaluate to false once we reach it a second time. This implies that the overall runtime of this algorithm is $O(\left|E\right| \log \left|V\right|)$.
+
+\subsubsection{Kruskal's Algorithm}
+Kruskal takes a slightly different approach. Instead of starting with a tree and maintaining it throughout, Kruskal starts with a forest and continually adds edges until we form a tree. The claim is that the tree at the end will be a minimum spanning tree of the initial graph. What edges should we add to ensure that this claim holds? As you might imagine it is the edge of minimal weight that we add. Once again, to be precise, at each step we pick the minimal edge among all the remaining edges that do not form a cycle. We form a cycle exactly when both end points of the edge are in the same connected component in $T$. Thus, we can describe the algorithm like so
+\begin{lstlisting}
+MST-KRUSKAL(G = (V, E), w):
+    # as before w = weight function/assignment
+    T = {}
+    sort edges so that w(e_1) <= w(e_2) < ... <= w(e_m)
+    for i in range(1, m + 1):
+        let (u_i, v_i) = e_i
+        if u_i and v_i are in different connected components of T:
+            T = T + {e_i}
+\end{lstlisting}
+
+We know that the sorting in line 4 can be done in $O(\left|E\right| \log \left|E\right|)$ time. The big question, of course, is how can we determine efficiently whether or not two vertices are in the same connected component. For this, we turn to a new data structure!

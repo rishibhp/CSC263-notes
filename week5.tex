@@ -1,0 +1,115 @@
+\section{Augmented Data Structures}\label{sec:aug-data-struc}
+As mentioned, augmenting data structures is the idea of storing additional information in our data structures to allow us to do additional operations reasonably fast, while still maintaining the efficiency of our previous operations. This latter part is often the difficult bit. We will study this via an example.
+
+Given an ordered set, we say that the rank of an element is its position in the set (for example the rank of the first element would be 1). With this definition, we would like to augment an AVL tree to have the following operations:
+\begin{minitemize}
+\item \ttt{RANK}($k$): Return the rank of key $k$
+\item \ttt{SELECT}($r$): Return the key with rank $r$
+\end{minitemize}
+As these still remain AVL trees, we still want to maintain the operations of \ttt{INSERT}, \ttt{SEARCH} and \ttt{DELETE}. 
+
+Without any modification to AVL trees, the new operations are $\Theta(n)$ (we effectively have to do an in order traversal through the tree to determine what position a particular node is in). A better suggestion appears to be to have each node store its rank. Now the new operations become $\Theta(\log n)$ (\ttt{RANK} simply requires searching for $k$ while for \ttt{SELECT} we run binary search on the rank itself) which seems rather promising but then we realise that the operations of \ttt{INSERT} and \ttt{DELETE} become $\Theta(n)$ as any changes to the tree may require us to update the ranks of all the nodes. 
+
+As before we need some kind of compromise. Something that allows us to find the rank of a node (relatively) easily and is also (relatively) easy to maintain. With a bit of stumbling around or by asking someone smarter than us, we may come across the following idea: have each node store its size, which is defined to be the number of nodes in the subtree rooted at that node (so the size of a leaf would be 1, the size of a complete binary tree of height 1 would be 3, etc). For one this allows us to use binary search to find a node of some particular rank. For example suppose we are looking for rank 4 and \ttt{root.size} is 7. If \ttt{root.left.size} is also 4 then we immediately know that the node we seek is in the left subtree and we need not bother at all with the right subtree. At this point we can repeat the process by looking at the left and right children again. If we were looking for rank 6 instead, then we would know that the desired node is in the right subtree. Additionally we can work out that 5 elements appear before the right child $R$ (4 in left subtree + 1 for the root itself). Thus we seek for the 1st element, or the node of rank 1, in the right subtree. The recursive structure of this algorithm now becomes clear. As a remark, we mention that \ttt{node.left.size + 1} is a very common calculation we will be doing and has a very natural interpretation: it is the rank of the root of the subtree rooted at that node. We call this quantity the local rank. As a further remark to the remark, recall that trees themselves have a recursive structure. Although this may seem obvious, this is a useful thing to remember when constructing algorithms for trees. In particular we might be able to make statements about the whole tree (i.e. a global statement) by working things out on/from the left and right subtrees (local statements).
+
+The algorithm for \ttt{SELECT} may, then, look something like this
+\begin{lstlisting}
+SELECT(T,r):
+    if T.left != NIL:
+        local_rank = T.left.size + 1
+    else:
+        local_rank = 1 # if left tree is empty then the root is first element hence has rank 1
+        
+    if local_rank == r:
+        return T.root
+    if k < local_rank:
+        return SELECT(T.left, r)
+    else:
+        return SELECT(T.right, r - local_rank)
+\end{lstlisting}
+
+Now we look at \ttt{RANK}. This means given a key $k$, we need to find how many elements less than $k$ are in the tree. Consider how we might do so while traversing the tree in order to find $k$. If $k$ is in node $m$'s right subtree then we know that at least \ttt{local\_rank}($m$) elements come before it. If $k$ is in the left subtree instead, we can make no further inferences (well, the the size of the left tree gives us an upper bound for the rank of $k$. So we are still cutting down the space of possibilities. However there is little we can do to use this information directly). This suggests keeping a running total as travel down the tree.
+
+\begin{lstlisting}
+RANK(T, k):
+    return  TREE-RANK(T, k, 0)
+    
+TREE-RANK(T, k, current_rank):
+    if root is NIL: # k not in T
+        pass
+    # determine local_rank
+    if root.left is NIL:
+        local_rank = 1
+    else:
+        local_rank = root.left.size + 1
+    
+    if k < root.item.key:
+        # moving left so can't deduce anything
+        return TREE-RANK(T, k, current_rank)
+    if k > root.item.key:
+        # add the number of items we have skipped
+        return TREE-RANK(T, k, current_rank + local_rank)
+    if k == root.item.key:
+        return current_rank + local_rank
+\end{lstlisting}
+
+The time for this implementation of \ttt{SELECT} and \ttt{RANK} are $\Theta(\log n)$ (we are effectively doing some version of binary search in both cases while keeping track of some additional information. Once again a common technique to use with trees to cut the space of possibilities in half each time). However, importantly, the old operation of \ttt{INSERT}, \ttt{SEARCH} and \ttt{DELETE} are still $\Theta(\log n)$! This is because when inserting or deleting we only need change the size attribute of the node being inserted/deleted and its ancestors.
+
+Unfortunately, we can't pat our backs quite yet. Recall theses are AVL trees and there is another operation that can be performed on such trees (and indeed often is). I speak, of course, of rotations. We need ensure that rotations are still constant time when maintaining the size attribute. However this is easily verified since rotations only change the sizes of two nodes (the root and one of its children depending on the direction of the rotation) and new sizes are easy to calculate since its just subtrees being moved around. Now we pat our backs!
+
+\section{Hashing}\label{sec:hashing}
+One of the things we briefly considered when considering the Dictionary ADT was a hash table. We now take a closer look at this implementation.
+
+\subsection{Definition}
+A hash table $T$ is an array with $m$ positions. We call each position a slot or a bucket. We also have a hash function $h$ that maps the entire universe of possible keys $U$ to $\{0, \dots, m - 1\}$ which are the slots in our hash table (or more precisely the indices of the slots). The idea is that we can hash a key and store an item in the hashed slot so that we don't need space for every possible key in $U$. By its very nature then, we are interested in the case when $m$ is smaller (in theory much smaller) than the size of $U$. 
+But this means that we will necessarily get collisions, i.e. two distinct keys $x, y$ such that $h(x) = h(y)$ (in fact if $|U| > m(n - 1)$ we can guarantee that at least one of the buckets will contain $n$ or more items. This follows from the pigeonhole principle). Therefore we need a strategy for how to handle collisions. Two such strategies we can look at are closed addressing and open addressing.
+
+\begin{example}
+A common example of a hash function is taking the mod with respect to some fixed number. For example we might define $h(x) = x \mod 12$. Clearly we will have collisions since $h(0) = h(12) = h(24) =...$ and $ h(1) = h(13) = h(25)=...$. 
+\end{example}
+
+\subsection{Closed Addressing}
+With the closed addressing strategy, also known as chaining, the slots in the hash table don't store values themselves but rather have pointers to linked lists which store the actual values. When there is a collision we simply add to this linked list (either at the beginning or at the end).
+
+\begin{remark}
+It might seem that we should insert at the beginning rather than at the end of linked list since the former is constant time while the latter is not (it's proportional to the length of the list). However recall that dictionaries only allow for unique keys. So every time we insert, we have to go through the entire linked list anyway to check whether or not we already have the key. Therefore inserting at the beginning and at the end have the same runtime. For now we will use the convention of inserting at the beginning.
+\end{remark}
+
+The worst case scenario for this is when every item gets hashed to the same bucket at which point we effectively have a linked list implementation of the Dictionary ADT. However, we might also expect this to be a fairly unlikely scenario, especially if we pick our buckets and hash function cleverly. To formalise this intuition, let's consider the average case runtime of search.
+
+\subsection{Average case analysis}
+An average case analysis requires us to make certain assumptions about our problem. We will make what is called the \textit{simple uniform hashing assumption}: a key picked at random is equally likely to hash into any bucket. A consequence of this is that the expected number of items in any bucket is $\frac{n}{m}$ (where $n$ is the total number of items and $m$ is the number of slots). This is such an important quantity that we give it a name both in Greek and in English; we write $\alpha = \frac{n}{m}$ and call it the \textit{load factor}. We will also assume that we are equally likely to search for any key in the universe $U$.
+
+Suppose we have a hash table $T$ into which we have inserted the items $x_1, \dots, x_n$ in that order so that $T$ now has $n$ items (it started empty).
+Suppose now we are searching for a key $k$ in $T$. The astute reader may realise that there are two cases: either $k$ is in $T$ or it is not. Each of these scenarios also has a certain probability of occurring but we will ignore that for now (as we will see, we won't need them!). The operation we will be counting is the number of comparisons made but we will also count applying the hash function as an operation.
+
+The easier/est case to consider is when $k$ is not in the $T$. We know that $k$ is equally likely to hash to any bucket and the expected number of items/expected length of the linked list in each bucket is $\frac{n}{m}$. Therefore
+$$ E[T] = 1 + \frac{n}{m} = 1 + \alpha $$
+where the $1$ term comes from applying the hash function itself. Therefore in this case we get that search is $\Theta(1 + \alpha)$
+
+If $k$ is in $T$ then it is in particular one of the $x_i$. The question then is how much work do we expect to do to reach any $x_i$. Note that there are $n - i$ items that are inserted after $x_i$ and we are assuming that each item can be hashed to any bucket in a uniform manner. Therefore we expect $\frac{n - i}{m}$ items to appear before $x_i$ in its corresponding linked list (recall our convention of inserting new items to the head of the linked list). This means $\frac{n - i}{m} + 1$ comparisons will be made to reach $x_i$ (the final $+1$ comes from comparing with $x_i$ itself). Then
+
+\begin{align*}
+    E[T] &= 1 + \sum_{i = 1}^{n} P(X_i) \cdot T(X_i)\\
+    &= 1 + \sum_{i = 1}^{n} \frac{1}{n} \left(\frac{n - i}{m} + 1\right)\\
+    &= 1 + 1 + \frac{1}{n} \left( \sum_{i = 1}^{n} \frac{n}{m} - \sum_{i = 1}^{n} \frac{i}{m} \right)\\
+    &= 2 + \frac{n}{m} - \frac{n(n+1)}{2nm}\\
+    &= 2 + \frac{n}{m} - \frac{n + 1}{2m}\\
+    &= 2 + \frac{n}{2m} - \frac{1}{2m}\\
+    &= 2 + \frac{\alpha}{2} - \frac{\alpha}{2n}
+\end{align*}
+As $n \to \infty$, the final term goes to 0, thus once again we find that the operation is $\Theta(1 + \alpha)$. 
+
+Since the average runtime is the same in both cases, it must be that the average runtime overall is 
+$$\Theta(1 + \alpha)$$
+
+\subsection{Open Addressing}
+An alternative to closed addressing is open addressing. With this strategy we keep all the data within the table itself. If the bucket in which an item is to be placed is already taken, we place the item in another (predetermined) bucket. In particular, we form a sequence of buckets which we iterate over in order to find an empty bucket within which we can place the item. This means that the hash function is now a function of 2 inputs: the key $k$ and the position in the sequence $i$. The bucket for $i = 0$ (or whatever the first term of the sequence is) is known as the home bucket and the sequence itself is known as the probe sequence. We almost always want the probe sequences to be a permutation of $\{0, \dots, m - 1\}$. Having a probe sequence like this means we go through every bucket in the table to determine whether or not an item can be placed inside. 
+
+\begin{remark}
+We might ask what happens if we wished to place more than $m$ items in this table. The answer is we don't. We simply don't insert more items than the table can hold with this strategy (in fact typically we stop way before $m$ to maintain good performance). If a large number of items \textit{do} need to be inserted, we might consider enlarging the table, switching the hash function, switching our collision strategy, etc.
+\end{remark}
+
+A simple example of a hash function for this strategy is $h(k, i) = (h'(k) + i) \mod m$ where $h'(k) = k \mod m$. This is known as linear probing (the probe sequence grows linearly). However there is a significant problem with linear probing: it leads to clustering. In other words once we hash into a probe sequence, another insertion, anywhere along the probe sequence, has the potential to make it longer, making search an increasingly difficult task. Moreover, larger clusters are more likely to grow (since they correspond to longer probe sequences, they contain a larger proportion of the buckets). We can improve things with quadratic probing (making the hash function depend on $i^2$ rather than just $i$) however there is still the problem that two keys hashed to the same bucket will have the same probe sequence. Thus we often do something called double hashing where the coefficient of $i$ is made a function of the key $k$ itself. Since the keys are distinct, this means that even if two keys have the same home bucket, they will have different probe sequences. However the same constraints on our hash function remain: the sequence over all $i$'s should still get us a permutation of $\{0, \dots, m - 1\}$.\\
+
+Finally we need to consider how deletion should work with open addressing. We can't simply remove the element from the table (or more precisely replace it with the null pointer) for the following reason: suppose a key $k$ has a home bucket $h_1$ which is filled so we place it in another bucket $h_2$. Suppose afterwards the item in $h_1$ is removed. Now when we search for $k$ we will reach $h_1$ and seeing the null pointer in $h_1$, we conclude that $k$ is not in our table. For this reason, when an item is to be deleted, we replace it with a marker to indicate that the item has been removed but the bucket once held something. This means that if we reach this bucket while searching, we should continue because the key we are looking for may be further down the line. This marker is known as the \textit{tombstone}. As you can imagine, the more tombstones we have in our table the worse searching is going to be. Hence why open addressing is rarely used in cases where deletion is going to be common.

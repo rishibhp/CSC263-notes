@@ -1,0 +1,95 @@
+\subsection{Hash Functions}
+We showed that the average running time for the operations in a hash table was $\Theta(1 + \alpha)$. However this relied on simple uniform hashing assumption, where we assume that a given key is equally likely to hash to any bucket. Whether or not this is actually true depends on the hash function. Thus a `good' hashing function will spread out the values appropriately. Another important characteristic of a good hash function is that it is efficient to compute (ideally constant time). Finally a good hash function should use every part of the input (i.e. the key) in its calculations, even for complex objects. This allows us to minimise collisions from occurring at all. This final feature hints at the fact that we are looking at more general cases than before where the keys need not be integers anymore. In practice it is difficult to find a hash function that satisfies all of the given conditions. Indeed you can see how particularly the last two features would compete with one another (using every part of the input (in general) means that more work will need to be done for longer inputs. For example if we have a hash function that hashes strings by doing something with every character, then the function may be inefficient to compute. If instead we make it more efficient by only working with select characters then collisions become more likely). 
+
+There still remains the general question of how we might work with non-integer keys. As one may guess, we first map the key to a (non-negative) integer then hash this integer. Let us look at strings for example. We already have a map from characters (at least those in the English language) to natural numbers given by their ASCII codes. Thus one suggestion may be to map every character to its ASCII code and sum them up to find the associated integer. The issue with this is that any reordering of the characters will produce the same number. We want to minimise the number of collisions so it would be ideal if we could avoid this. In particular then, we need some way of incorporating the order of the characters into our output. What we do in this case is think of the string as a number in base 128 (there are 128 characters in ASCII). Thus for example
+$$ \ttt{key} \to 107 \cdot 128^2 + 101 \cdot 128 + 121 = \text{BIG NUMBER} $$
+where 107, 101 and 121 are the ASCII codes for \ttt{k}, \ttt{e} and \ttt{y} respectively.
+
+Regardless of how we choose the particular map into the natural numbers, once we have it how should we map this number into our buckets $\{0, \dots, m - 1\}$? We first need to decide what $m$ should be. Recall that the average performance of the hash table is dependent on the load factor, so typically we choose an $m$ that is reasonably big to make the load factor small but not so big as to take up a lot of space. 
+
+We have already seen one way of mapping from a number to the buckets: modulo with $m$. This is known as the division method. There are a few things to keep in mind with the choice of $m$. For example, if we are using the above method for the assignment of numbers to strings, then certainly $m$ should not be a power of 2. This is because taking the modulo would largely be equivalent to looking at only the last few characters (think of modding a number in base 10 with any power of 10, only the last few digits remain). Typically we choose $m$ to be a prime number (close to the ideal $m$ that we decide before, based on the load factor and space constraints) to ensure something like this doesn't happen inadvertently. There is another method called the multiplication method. For this we first multiply the key $k$ with some number $A$ where $A$ is (strictly) between 0 and 1. This ensure that $k$ has a fractional part. We can find this fractional component by $kA - \lfloor kA \rfloor$. We know have a real number that is between 0 and 1. Multiplying this by $m$ gets us a real number between $0$ and $m$. Finally we floor the result to ensure we get an integer in $\{0, \dots, m - 1\}$. To put it all together, the mapping is as follows:
+$$ k \mapsto \lfloor m(kA - \lfloor kA \rfloor) \rfloor $$
+There exist many heuristics for choosing an appropriate $A$ so we get suitably wide distribution.
+
+\subsection{Hashing vs Balanced Trees}
+If we make the load factor sufficiently small, then the operations for a hash table are $\Theta(1)$. This is much better than the $\Theta(\log n)$ performance given by balanced trees. What advantages, then, do balanced trees provide?
+
+For one thing, the worst case performance with a hash table is still $\Theta(n)$, which may be a cause for concern, depending on the use case. Additionally, recall how easy it was to augment our balanced tree to have it handle additional operations. This will be much more difficult, near impossible, with hash tables. Hence if we need (or may need) any operations besides the three asserted by the ADT, we may opt for balanced trees.
+
+\section{Quicksort}
+A quick summary of quicksort: suppose we want to sort an array $A$. We choose the first element to be the so-called \textit{pivot}. We compare all elements to the pivot and create two new arrays: one for every element smaller than (or equal to) the pivot and one for everything greater than. This means that we never need to compare elements in the first array to elements in the second array again. We now repeat the same process with the 2 new arrays and keep going until our arrays are of length at most 1 which we already know to be sorted. Then its a simple matter combining everything appropriately. The code is provided below
+\begin{lstlisting}
+def quickSort(array):
+    if len(array) < 2:
+        return array[:] # make a copy
+    else:
+        pivot = array[0]
+        smaller, bigger = partition(array[1:], pivot)
+        smaller = quickSort(smaller)
+        bigger = quickSort(bigger)
+        return smaller + [pivot] + bigger
+
+def partition(array, pivot):
+    smaller = []
+    bigger = []
+    
+    for item in array:
+        if item <= pivot:
+            smaller.append(item)
+        else:
+            bigger.append(item)
+    
+    return smaller, bigger
+\end{lstlisting}
+
+Immediately, we wish to consider what the worst case behaviour of this algorithm is. We will use the number of comparisons performed (i.e. the number of times line 16 is run) to measure the worst case behaviour. First we see that each item is a pivot, at most once (note how in line 6 we skip over the pivot when partitioning). Then at most \textit{all} other elements are compared to the pivot (typically, fewer comparisons will be performed. If \ttt{smaller} or \ttt{bigger} are not empty then the pivot of one won't be compared to any of the elements of the other. This was the whole point of quick sort!). This means that in the worst case quick sort is $O(n^2)$ (at most $n$ pivots with at most $n - 1$ comparisons each. This is a drastic overcount since any pair of elements is compared at most once. Therefore the number of item comparisons is at most the number of possible pairs which is $\binom{n}{2}$. The asymptotic behaviour remains the same however). 
+
+Now we wish to argue that in the worst case quicksort is $\Omega(n^2)$ as well. The family of inputs we will use $[n, n-1, n-2, \dots, 2, 1]$. Let $C(n)$ denote the number of comparisons made on this family of inputs. We call \ttt{partition} in line 6 which creates the lists \ttt{smaller} and \ttt{bigger} which are empty and $[n - 1, n - 2, \dots, 2, 1]$ respectively. The function \ttt{partition} performs $n - 1$ comparisons in line 16 in order to create these lists. No further comparisons are made on line 7 when we call quicksort on \ttt{smaller} and $C(n - 1)$ comparisons are made on line 8 when we call quicksort on \ttt{bigger}. Therefore $C$ satisfies the following recurrence relation
+$$ C(n) = (n - 1) + C(n - 1) $$
+for $n > 1$ and for $n = 1$ we have $C(1) = 0$. Therefore
+\begin{align*}
+    C(n) = \sum_{i = 1}^{n - 1} i = \frac{n(n - 1)}{2}
+\end{align*}
+Therefore quicksort is $\Theta(n^2)$ in the worst case.
+
+Although quicksort doesn't appear to be very `quick' in the worst case, things are much better in the average case. This of course requires a probability distribution over the inputs. We will assume our inputs to be some permutation of $\{1, \dots, n\}$ where each permutation is equally likely (one might argue that this doesn't represent the space of all possible inputs. While this is true, the only thing that is important for the sorting is the relative sizes of the elements so other cases are equivalent to the case being considered. There is perhaps a slight wrinkle where we aren't considering lists that may have repeated elements. But a quick inspection of the algorithm tells us that allowing for repeated elements won't affect the number of comparisons made).
+
+Let $T$ be the random variable denoting the number of comparisons made on an input. We wish to find $E[T]$. For $i, j \in \{1, \dots, n\}$ with $i < j$, we define $X_{ij}$ to be 1 if $i$ and $j$ are compared (on a particular input) and 0 otherwise. Then
+\begin{align*}
+    T &= \sum_{i = 1}^{n - 1} \sum_{j = i + 1}^{n} X_{ij}
+\end{align*}
+and
+\begin{align*}
+    E[T] &= \sum_{i = 1}^{n - 1} \sum_{j = i + 1}^{n} E[X_{ij}]
+\end{align*}
+In particular we need to find the probability that $i$ and $j$ are compared. This comparison occurs if and only if one of $i$ or $j$ are picked to be pivots before they are split into the separate \ttt{smaller} and \ttt{bigger} lists. Therefore $i$ and $j$ are compared if and only if the first pivot to be chosen from $\{i, i + 1, \dots, j\}$ is one of $i$ or $j$. Thus we get
+\begin{align*}
+    P(\text{$i$ or $j$ are chosen to be pivots} \big| \text{a pivot is chosen from } \{i, \dots, j\}) = \frac{2}{n} \cdot \frac{n}{i + j - 1} = \frac{2}{i + j - 1}
+\end{align*}
+
+This lines up with intuition. If $i$ and $j$ are close together (in value) then they are more likely to be compared since there are fewer numbers between them that could act as pivots to separate them. Therefore
+\begin{align*}
+    E[T] &= \sum_{i = 1}^{n - 1} \sum_{j = i + 1}^{n} \frac{2}{j - i + 1}\\
+    &= \sum_{i = 1}^{n - 1} \sum_{k = 1}^{n - i} \frac{2}{k + 1}\\
+    &< 2(n - 1) \sum_{k = 1}^{n} \frac{1}{k}
+\end{align*}
+The final sum is the harmonic series which we know to be $\Theta(\log n)$. Thus we conclude that in the average case, quicksort is $O(n \log n)$ (note the inequality in the last line). We have an upper bound for the average case, but what we would really like is a tight bound (although the upper bound is enough to show that the algorithm performs much better on average). What we will do is work out the sum a bit more exactly. 
+
+\begin{align*}
+    E[T] &= \sum_{i = 1}^{n - 1} \sum_{k = 1}^{n - i} \frac{2}{k + 1}\\
+    &= 2 \sum_{i = 1}^{n - 1} \sum_{k = 1}^{n - 1} \frac{1}{k + 1}\\
+    &= 2 \sum_{k = 1}^{n - 1} \frac{1}{k + 1} (n - k)\\
+    &= 2 \sum_{k = 1}^{n - 1} \frac{n + 1 - (k + 1)}{k + 1}\\
+    &= 2(n + 1) \sum_{k = 1}^{n - 1} \left( \frac{1}{k + 1} \right) - 2(n - 1)
+\end{align*}
+The reduction of the double summation to the single summation in the third line comes from noting the fact that for each $k$, $\frac{1}{k + 1}$ appears $n - k$ times. Now we can be certain that sorting done by quicksort is on average $\Theta(n \log n)$. 
+
+\subsection{Randomised Quicksort}
+
+Now that we know that quicksort performs well if the input is randomly sorted but poorly if the input is sorted, or nearly sorted. We would like some way of ensuring we get the former case (or at least improve our chances of getting the former case) as opposed to the latter one. The problem, we may realise, is that the pivot is always picked from a fixed spot in the array. Thus we can always construct a family of inputs on which the algorithm will behave poorly (for example we may always pick the central element to be the pivot. We can still find the family of inputs on which we get $\Theta(n^2)$ runtime. As a useful exercise, one can try and describe what these inputs would be. The answer can be found in the remarks below). The same holds true if we move around the pivot in some systematic, deterministic way (for example, you might alternate between the pivot being the first and the last element. Once again lists where the elements are in decreasing order give a poor runtime). Hence what we need to do is choose the pivot in a non-deterministic way, which is to say, we choose the pivot randomly. In this case the worst case analysis becomes a touch more difficult and a touch more nuanced. To be precise, the worst case on some given input is still $O(n^2)$. This occurs if the random pivots that are chosen are `bad' pivots. However this is no longer useful information since if we were to run the algorithm again we would almost certainly see a different set of pivots in which case the performance would be better. Instead what we are more interested in, what is more useful, is how badly can we expect the algorithm to behave on average. In other words, we wish to find the expected worst case runtime. This analysis is in fact almost identical to the average case analysis we did above which means what we would find is that on any particular input, the expected worst-case runtime is $\Theta(n \log n)$.\\
+
+There are some things to be learnt from this. Perhaps the most important thing is that randomisation can in fact improve algorithms! While we may think that adding uncertainty to an algorithm's design is poor form, in some cases that is exactly what we need. When should we use randomness to improve the behaviour of our algorithms? Certainly not for all algorithms, since for example, using a randomized algorithm would be a terrible idea for a hash function. In general, we use randomized algorithms when there are lots of good choices but it's difficult to find a choice that is guaranteed to be good (indeed there may be no choice that is good for all inputs, as with quicksort above). In this case, we hope to find a good choice through sheer dumb luck.
+
+\begin{remark}[Solution to above exercise]
+Suppose we have the elements $\{1, \dots, n\}$ which we wish to place into an array of size $n$. We place $1$ at $n // 2 = \lfloor \frac{n}{2} \rfloor$. Then 2 at $n//2 - 1$ and $3$ at $n//2 + 1$. Similarly 4 is placed $n//2 - 2$ and 5 at $n//2 + 2$ and we keep going like so where each element $k$ is placed at $n//2 + (-1)^{k + 1} k//2$. In this case every time the pivot is chosen, it is the smallest item in the list (assuming the pivot is chosen to be at position $n//2$).
+\end{remark}

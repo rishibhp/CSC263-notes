@@ -1,0 +1,98 @@
+\section{Disjoint Set ADT}
+The data for the disjoint set ADT is a collection of non-intersecting sets where each set is identified by a unique element of the set called the representative. Thus we can determine whether two elements are in the same set by comparing their representative (or more precisely by comparing the representatives of the sets that the two elements belong to).
+
+Given the context from Kruskal's algorithm, it seems natural to have the following operations for this ADT:
+\begin{itemize}
+    \item \ttt{Make-Set(x):} Given an element $x$ that is not already in one of the disjoin sets, create a new set containing only $x$ and designate $x$ as the representative of this set.
+    \item \ttt{Find-Set(x):} Given an element $x$, return the representative of the set that $x$ belongs to (or NIL if $x$ belongs to none of the sets).
+    \item \ttt{Union(x, y):} Given elements $x$ and $y$ that belongs to the sets $S_x$ and $S_y$, make a new set $S_x \cup S_y$, designate a representative and remove $S_x$ and $S_y$ from the ADT (the last part is necessary to maintain disjointedness of the sets)
+\end{itemize}
+\begin{remark}
+It is also useful (and important) to note what is \textit{not} possible with this data structure. For example, there is no way of finding what all the disjoint sets are or of finding what all the elements in a given disjoint set are.
+\end{remark}
+With this, we can make the pseudocode a bit less informal
+\begin{lstlisting}
+MST-KRUSKAL(G = (V, E), w):
+    T = {}
+    sort edges so that w(e_1) <= w(e_2) < ... <= w(e_m)
+    for v in V:
+        Make-Set(v)
+    for i in range(1, m + 1):
+        let (u_i, v_i) = e_i
+        # if u_i and v_i are in different connected components of T:
+        if Find-Set(u_i) != Find-Set(v_i):
+            Union(u_i, v_i)
+            T = T + {e_i}
+\end{lstlisting}
+
+It is important to realise how the disjoint set ADT is typically implemented: in particular each element maintains a pointer to the DJS data structure.
+
+We will look at various ways of implementing DJS analysing each one by the worst case sequence complexity.
+
+\subsection{Implementation I: Circular linked list}
+
+% TODO: Include diagram for DJS implementation 1
+
+We might initially start with each disjoint set being a linked list with the final element having a pointer back to the first element (thereby forming the circular structure). We designate one of the elements in the linked list as the representative (marking it in some way) so that \ttt{Find-Set} simply requires iterating through the list until we find the representative. \ttt{Union} is a bit more finnicky (we are trying to combine two loops into one loop. The procedure is as you would expect but to execute it takes some work.).
+
+Suppose the set $S_x$ contains $x_1, \dots, x_n$ and the set $S_y$ contains $y_1, \dots, y_m$ (where $S_x$ and $S_y$ are both stored as circular linked lists) with $x_1$ and $y_1$ as the respective representatives. Then running \ttt{Union}($x_2, y_5$), for example, we link $x_2$ to $y_5$ (i.e. the next element of $x_2$ now points to $y_5$). Then we iterate through $S_y$ to find the element preceding $y_5$, namely $y_4$, and link $y_4$ to $x_3$ (and remove the pointer from $y_4$ to $y_5$ of course). This forms one continuous loop. The only problem is that this set now has two representative but this can be dealt with easily by demarking (unmarking?) the representative in $S_y$ as we were iterating over it.
+
+\begin{remark}\label{rem:impl1-convention}
+Quite often, instead of linking $x_3$ to $y_5$ we might instead link $x_n$ to $y_1$ and $y_n$ to $x_1$. Ultimately of course the result is the same (we still get one continuous loop of $S_x \cup S_y$) and takes about the same time. With this implementation of \ttt{Union}, the result of unioning an element of $S_x$ with an element of $S_y$ will always produce the same result (for example the resulting linked list with \ttt{Union}($x_2$, $y_5$) and as the linked list with \ttt{Union}($x_4, y_1$)). 
+\end{remark}
+
+Let us analyse this implementation using worst case sequence complexity. Note that in a sequence of $m$ operations we can get a set to contain at most $m$ elements and \ttt{Find-Set} will need to iterate over most $m - 1$ items on such a set (if we call it on the element immediately after the representative for example). Thus immediately we find that the worst case sequence complexity is $O(m^2)$ (this would correspond to calling \ttt{Find-Set} on the set of $m$ elements $m$ times. Clearly this is a very large upper bound since simply constructing a set of $m$ elements would require more than $m$ operations). 
+
+We claim that the worst-case sequence complexity is in fact $\Theta(m^2)$. For this we need to give a family of sequences which actually achieves the $m^2$ runtime. The idea is to actually achieve the sequence that was suggested in the upper bound argument above. Namely, we will use the first portion of the sequence to construct a large set and then use the latter portion of the sequence to call expensive \ttt{Find-Set} operations. To be precise, the first $n$ operations in the sequence are \ttt{Make-Set}'s, where $n = \frac{m}{4}$. The following $\frac{m}{4} - 1$ operations are unions so that we can combine these $n$ elements into one big set (this portion of the sequence might look something like \ttt{Union}($x_1, x_2$), \ttt{Union}($x_1, x_3$), \dots, \ttt{Union}($x_1, x_n$)). The remainder of the sequence is \ttt{Find-Set}($x_2$) (remember the convention described in \autoref{rem:impl1-convention}). In this case, the \ttt{Find-Set}'s will each require $\Theta(n) = \Theta(\frac{m}{4})$ runtime. Since there are $\frac{m}{2} + 1$ such \ttt{Find-Set}'s, these operations alone will require $\Theta(m^2)$ runtime giving the desired tight bound.
+
+\subsection{Implementation II: Backpointers}
+
+% TODO: Include diagram for DJS implementation 2
+
+The problem with the above implementation is that some \ttt{Find-Set}'s take too long. We might consider fixing this by including a pointer to the representative in every node. In this manner, \ttt{Find-Set} would run in constant time! The problem, as you might imagine, is union. In particular, we would need to change the pointers for all the elements in the second set. 
+
+We can similarly argue that the worst case sequence complexity for this implementation is $\Theta(m^2)$. As before, we argue that there at most $m$ elements in any disjoint set, thus union requires changing at most $m$ pointer. Thus if the sequence was all \ttt{Union}'s and it \textit{did} have to change $m$ pointers each time, we would get a quadratic runtime. Clearly the runtime for a sequence of length $m$ must smaller than this, allowing us to conclude that that the worst case sequence complexity is $O(m^2)$. We can also construct a sequence to conclude that the worst case sequence complexity is $\Theta(m^2)$. As before, we will try achieve the worst case scenario painted previously. We will take $n = \frac{m}{2}$ and have the first $n$ operations be \ttt{Make-Set}'s. The following $\frac{m}{2} - 1$ operations are \ttt{Union}'s where the second element is always the larger one (as an example, this sequence might look something like \ttt{Union}($x_2, x_1$), \ttt{Union}($x_3, x_1$), ..., \ttt{Union}($x_n, x_1$)). The number of pointers changed over all the unions is 
+$$ \sum_{i = 1}^{\frac{m}{2} - 1} i = \Theta(m^2) $$
+
+Side note: the sequence defined above is of length $m - 1$. You can have the last operation be anything to get the sequence to be of length $m$. It doesn't really matter since the unions defined above take $\Theta(m^2)$ on their own.
+
+\subsection{Implementation III: Union by Weight}
+There is an obvious improvement to the above implementation. Instead of always changing the pointers in the second set, we should instead change the pointers in the smaller of the two sets. To this end, we add an attribute to each disjoint set called the weight, which is simply the number of items in the set.
+
+Now for the worst case sequence complexity analysis. In this case we will only be able to find an upper bound rather than a tight bound. Let $x$ be any element in one of the disjoint sets. We want to find the number of times the pointer from $x$ to its representative will change. Note that the pointer only changes when $x$ is in the smaller of the two sets. In such cases the size of the set that $x$ is in at least doubles. Thus $x$ is going to be in the smaller set at most $\log n$ times where $n$ is total number of elements in all of the disjoin sets. Since each element's pointer is changed at most $\log n$ times and there are $n$ elements, at most $n \log n$ pointers are changed. Since \ttt{Make-Set} and \ttt{Find-Set} are both constant time, we find that the worst case runtime of a sequence of $m$ operations with this implementation is $O(m + n \log n)$ where $n$ is the number of \ttt{Make-Set} operations in the sequence (if there are lots of \ttt{Make-Set} and \ttt{Find-Set} operations instead of \ttt{Union} operations, then $m$ is going to be greater than $n \log n$, thereby dominating the runtime. Otherwise we have $O(n \log n)$ runtime). 
+
+\subsection{Implementation IV: Inverted Tree}
+Having played around with this a fair amount by now, we might realise that it seems unnecessary to add lists and combine loops to form larger loops, when all we really need is some way of getting to the representative from any given node. Thus for instance when taking union of two sets, why not have the representative of the second one point to the representative of the first one. Furthermore, having forward pointers is largely unnecessary when again all we need is a way to get to the representative. Instead we could reverse the forward pointers so there is a path from every node to the representative.
+
+To summarise, we have the following: we have a tree structure with the representative as the root. However, the tree is inverted since the rather than have parents point to children, we have children point to parents. We will also have the root point to itself.
+
+% TODO: Add diagram for implementation 4
+
+With this implementation, \ttt{Make-Set} is of course constant. \ttt{Find-Set} in the worst case is going to be $\Theta(h)$ where $h$ is the height of the tree. Finally \ttt{Union} is simply the time for \ttt{Find-Set} plus some constant amount of changing pointers. 
+
+As usual, we will do our worst case sequence complexity analysis. As before it is easy that worst case runtime must be $O(m^2)$ (\ttt{Find-Set} takes at most $\Theta(m)$ time, for example if we call it on a leaf of the tree and the tree has no branches). The sequence we provide is the one that more or less actualises this worst case scenario. Namely we have $n = \frac{m}{4}$ \ttt{Make-Set} operations and $\frac{m}{4} - 1$ \ttt{Union}'s in such a way so that the resulting tree is simply a chain (this can be done by making the first argument to \ttt{Union} a singleton set every time). Then we call \ttt{Find-Set} on the very last item each time for the remaining operations giving us $\Theta(m^2)$ runtime in the worst case.
+
+\subsection{Implementation V: Inverted Tree with Union by Weight}
+We can of course make the same improvement we made last time: namely each tree stores its weight (i.e. the number of nodes in it) and when performing a union we ensure that the larger tree is one whose root/representative is maintained (note that larger trees will have more leaves and \ttt{Find-Set} is most expensive on leaves. So in order to minimise the number of leaves after the union we keep the larger tree as the root). 
+
+We can run a similar analysis to before. Let $x$ be any arbitrary element in one of the disjoint sets. The distance between $x$ and its representative only increases if it is unioned with a larger set. By previous argument, we know that this can happen at most $\log n$ times (where $n$ is total number of elements). Note that each step distance between $x$ and and its representative only increases by 1. Since at the beginning $x$ is its own representative, we know that the height of any tree in the data structure can be at most $\log n$ after $m$ operations, $n$ of which were \ttt{Make-Sets}. This means that each \ttt{Find-Set} takes at most $O(\log n)$ thus the worst case time complexity of a sequence of $m$ operations is $O(m \log n)$. 
+
+\subsection{Implementation VI: Path Compression}
+Ideally, what we would like is for the tree to always be of height 1 with each node pointing directly to the representative. But as you might imagine that is going to be quite hard to maintain. For example upon performing a union we would have to go through all the children of the root and change their pointers to the new one (and we don't even have a way of finding all the children! Remember all the pointers are reversed so we only have pointers from children to their parents). A better idea is to update these pointers when we find them. In particular, suppose we call \ttt{Find-Set} on an element and see that it doesn't point to the root. Then we follow the path to the root and modify all the nodes along the path so that they all point directly to the root. This is known as \textit{path compression}. Admittedly this might double the runtime for \ttt{Find-Set} (if an element is at depth $d$, then it takes $d$ steps to get to the root and since there are $d$ elements along the way (including itself), we have $d$ pointers to change as well) but it means that all future operations are much cheaper. A messy proof tells us that the sequence complexity with path compression is $O(m \log m)$. 
+
+% TODO: Add diagram for path compression
+
+\subsection{Implementation VII: Union by Rank}
+With path compression, it is not the weight of the tree that is important but its height. Thus we will track the height instead of the weight. But then we realise that keeping track of the height exactly is actually quite difficult. Performing a path compression may or may not have decreased the height; the only way to know would be know the depths of all the leaves (which would involve keeping track of the leaves as well, at least roughly). Luckily we don't need to known the height exactly, simply knowing an upper bound for it will do. This quantity is known as the rank. It can also be defined like so: the rank of a leaf is always 0 and the rank of an internal node is 1 more than the maximum rank of its children.
+
+We need to check how rank interacts with the ADT operations. If we do \ttt{Make-Set}($x$), then it is clear that we should set the rank of the node to be 0 (remember that the rank of a leaf is 0). The rank remains unchanged after running \ttt{Find-Set} (if anything the height will have decreased, but the upper bound will still hold so it need not be changed). When performing a \ttt{Union} we ensure that it is the representative of higher rank that becomes the root in which case the rank need not changed (the upper bound is still maintained). If, however, the rank of the two representatives is the same, then taking the union \textit{will} could increase the maximum height, by 1, and therefore we also need to increase the rank by 1. In this scenario, we could pick either representative to be the root, but by convention we will always choose it to be the first one. 
+
+An even messier proof than before shows that the worst case sequence complexity for this implemenetation is $O(m \log^* n)$ where $\log^*$ is the \href{https://en.wikipedia.org/wiki/Iterated_logarithm}{iterated logarithm}. $\log^* n$ is the number of times that the logarithm function must be applied to $n$ in order to get a result that is below 1. To be formal, you can define it as
+\begin{align*}
+    \log^*(n) = 
+    \begin{cases}
+    0 \ & n \leq 1\\
+    1 + \log^*(\log n) & n > 1
+    \end{cases}
+\end{align*}
+Note that $\log^*$ is a very, very slow growing function. The function is 0 on $(-\infty, 1]$, 1 on $(1, 2]$, 2 on $(2, 4]$, 3 on $(4, 16]$, 4 on $(16, 65536]$, 5 on $(65536, 2^{65536}]$ and so on. Thus the function is essentially constant meaning that the amortised complexity with this algorithm is very close to being constant.
